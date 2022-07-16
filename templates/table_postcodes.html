@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+    <!-- Countries list -->
+    <section class="p-5">
+        <table class="table table-hover caption-top" style="max-width:900px; margin-left: auto; margin-right: auto;">
+            <caption>
+                <h5 class="margin-left: auto; margin-right: auto">Real estate {{ deal_type }} prices in {{ city.capitalize() }}, {{ country.upper() }} (pounds):</h5>
+                <!-- Additional navigation -->
+                <p>
+                    <a href="{{ url_for('cities', deal_type=deal_type, country=country) }}">{{ country.upper() }}</a> / {{ city.capitalize() }}
+                </p>
+            </caption>
+            <thead>
+                <tr>
+                    {% for header in table_header.keys() %}
+                        {% if header == 'Postcode' %}
+                            <th scope="col">{{header}}</th>
+                        {% else %}
+                            <th scope="col" style="text-align: center">{{header}}</th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in data %}
+                    <tr>
+                        <th scope="row"><a href="{{ url_for('postcode', deal_type=deal_type, country=country, city=city, postcode=record['postcode']) }}">{{record['postcode']}}</a></th>
+                        <td style="text-align: center">{{record['bd1a']}}</td>
+                        <td style="text-align: center">{{record['bd2a']}}</td>
+                        <td style="text-align: center">{{record['bd3a']}}</td>
+                        <td style="text-align: center">{{record['bd4h']}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>                          
+        </table>
+    </section> 
+{% endblock %}
+
+
+
