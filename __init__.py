@@ -36,8 +36,12 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
 @app.route('/sitemap', methods=['GET'])
-@app.route('/sitemap/', methods=['GET'])
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
     link = 'http://showmeprice.com'
