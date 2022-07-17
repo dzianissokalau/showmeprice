@@ -1,9 +1,17 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, redirect
 from data import data, columns_cities, columns_postcodes
 from datetime import datetime, timedelta
 
 
 app = Flask(__name__)
+
+
+@app.before_request
+def before_request():
+    if 'https://showmeprice.herokuapp.com/' in request.url:
+        url = request.url.replace('https://showmeprice.herokuapp.com/', 'http://www.showmeprice.com/', 1)
+        code = 301
+        return redirect(url, code=code)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -78,4 +86,4 @@ def sitemap():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
