@@ -44,7 +44,7 @@ def about():
 @app.route('/sitemap', methods=['GET'])
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
-    link = 'http://showmeprice.com'
+    link = 'http://www.showmeprice.com'
     dt = (datetime.now() - timedelta(days=7)).date().isoformat()
     pages = []
 
