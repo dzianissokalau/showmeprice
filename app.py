@@ -3,6 +3,7 @@ from data import data, columns_cities, columns_postcodes
 from datetime import datetime, timedelta
 
 
+
 app = Flask(__name__)
 
 
