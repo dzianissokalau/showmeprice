@@ -4,7 +4,7 @@
     <section class="p-5">
         <table class="table table-hover caption-top" style="max-width:900px; margin-left: auto; margin-right: auto;">
             <caption>
-                <h5 class="margin-left: auto; margin-right: auto">Property {{ deal_type }} prices in {{ city.capitalize() }}, {{ country.upper() }} (pounds):</h5>
+                <h5 class="margin-left: auto; margin-right: auto">Property median {{ deal_type }} prices in {{ city.capitalize() }}, {{ country.upper() }}:</h5>
                 <!-- Additional navigation -->
                 <p>
                     <a href="{{ url_for('cities', deal_type=deal_type, country=country) }}">{{ country.upper() }}</a> / {{ city.capitalize() }}
