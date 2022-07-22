@@ -7,11 +7,18 @@ from datetime import datetime, timedelta
 app = Flask(__name__, static_folder='static')
 
 
+# @app.before_request
+# def before_request():
+#     if 'https://showmeprice.herokuapp.com/' in request.url or request.is_secure:
+#         url = request.url.replace('showmeprice.herokuapp.com', 'www.showmeprice.com', 1)
+#         url = request.url.replace('https://', 'http://', 1)
+#         code = 301
+#         return redirect(url, code=code)
+
 @app.before_request
 def before_request():
-    if 'https://showmeprice.herokuapp.com/' in request.url or request.is_secure:
+    if 'https://showmeprice.herokuapp.com/' in request.urle:
         url = request.url.replace('showmeprice.herokuapp.com', 'www.showmeprice.com', 1)
-        url = request.url.replace('https://', 'http://', 1)
         code = 301
         return redirect(url, code=code)
 
