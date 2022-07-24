@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-    <!-- Countries list -->
     <section class="p-5">
+        <!-- Map -->
+        <div id="map" style="max-width: 900px; height: 700px; margin-left: auto; margin-right: auto;"></div>
+    </section> 
+    <!-- Countries list -->
+    <section class="p-3">
         <div class="table-responsive-md">
-            <table class="table table-hover caption-top table-sm" style="max-width:900px; margin-left: auto; margin-right: auto;">
+            <table class="table table-hover caption-top" style="max-width:900px; margin-left: auto; margin-right: auto;">
                 <caption>
                     <h5 class="margin-left: auto; margin-right: auto">Property median {{ deal_type }} prices in {{ country.upper() }}:</h5>
                 </caption>
@@ -31,8 +35,34 @@
                 </tbody>                          
             </table>
         </div>
-    </section> 
+    </section>
+    <script>
+        var map = L.map('map').setView([54.5, -2], 6);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+        function getColor(r) {
+            return r < 10 ? '#12c000' :
+                   r < 20 ? '#55b000' :
+                   r < 30 ? '#71a000' :
+                   r < 40 ? '#849000' :
+                   r < 50 ? '#927e00' :
+                   r < 60 ? '#9c6c00' :
+                   r < 70 ? '#a25900' :
+                   r < 80 ? '#a44600' :
+                   r < 90 ? '#a33100' :
+                            '#9f1807';
+        };
+        {% for record in data %}
+            L.circle([{{ record['latitude'] }}, {{ record['longitude'] }}], {
+                color: '#ffffff',
+                weight: 1,
+                fillColor: getColor({{ record['price_rank'] }}),
+                fillOpacity: 0.8,
+                radius: 9000
+            }).addTo(map)
+            .bindPopup("{{ record['city'] }}");
+        {% endfor %}
+    </script>
 {% endblock %}
-
-
-
