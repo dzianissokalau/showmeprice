@@ -17,12 +17,19 @@ def before_request():
 
 
 @app.route('/', methods=['GET', 'POST'])
+def index(deal_type='buy', country='uk'):
+    table_header = columns_cities
+    table_data = data[deal_type][country]['all']
+
+    return render_template('cities.html', table_header=table_header, data=table_data, country=country, deal_type=deal_type)
+
+
 @app.route('/<deal_type>/<country>', methods=['GET', 'POST'])
 def cities(deal_type='buy', country='uk'):
     table_header = columns_cities
     table_data = data[deal_type][country]['all']
 
-    return render_template('table_cities.html', table_header=table_header, data=table_data, country=country, deal_type=deal_type)
+    return render_template('cities.html', table_header=table_header, data=table_data, country=country, deal_type=deal_type)
 
 
 @app.route('/<deal_type>/<country>/<city>', methods=['GET', 'POST'])
